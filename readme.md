@@ -12,7 +12,7 @@
 
 </details>
 
-## DevLog #18 - 12.05.2023
+## DevLog #18 - 12.04.2023
 
 Hello everyone, I had a tiring day today, so I'll keep it short because I'm really looking forward to getting some rest. :smile:
 
@@ -30,7 +30,7 @@ I'm happy to say that the server is finally finished!
 
 Of course, there are still many features that can be added and plenty of room for improvement, but as I mentioned in my previous DevLogs, my goal was to focus on releasing the essential part of the server.
 
-## DevLog #17 - 10.05.2023
+## DevLog #17 - 10.04.2023
 
 Hello everybody!
 
