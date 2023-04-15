@@ -12,6 +12,93 @@
 
 </details>
 
+## DevLog #19 - 14.04.2023
+
+### DYOM Bingo
+
+Today was a day of organization in the DYOM Bingo repository. I made a total adjustment to the repository's [README.md](https://github.com/Toriality/DYOM-Bingo/README.md), made it prettier and more readable, and the main thing, added the all-contributors to the project.
+
+[All-contributors](https://allcontributors.org) is a tool that allows contributors to be recognized and credited for their work in a project. It generates a table in the project's README.md file that lists all the contributors and their types of contributions. It is very beneficial because it helps acknowledge and appreciate the efforts of all contributors, regardless of the size or type of their contributions. This can increase the motivation and engagement of contributors and improve the overall project.
+
+![readmemd](https://user-images.githubusercontent.com/38092988/232176929-28dcfd81-b87d-4c83-aa37-3ad55cfde47a.png)
+
+So I'm looking forward to seeing how the contributors interact with this new tool.
+
+### DYOM Webiste
+
+I didn't have much time to work on the backend today, but I can already announce that I'm working on an important change for the backend. It will affect the database and the uploads folder.
+
+Currently, the server-side code validates the uploaded files and stores them in specific folders. However, having multiple folders in the upload folder of a server can lead to several problems, such as increased complexity, reduced scalability, and difficulty in maintenance and backup.
+
+To simplify and optimize the file storage system, I have decided to generate a unique identifier for each file's content by analyzing its content and renaming it to its CRC. [CRC stands for cyclic redundancy check](https://wiki.osdev.org/CRC32), and it is a mathematical algorithm that generates a fixed-size checksum for a file's content.
+
+By using the CRC number as a unique identifier for each file, we can simplify the file storage system and make it more efficient. It allows us to identify duplicates and store them only once in the database, instead of cluttering the server directories with multiple copies of the same file. This not only reduces the amount of storage space required but also makes it easier to manage and scale the system.
+
+Additionally, it enables us to focus on organizing the logic of the files in the database, instead of relying on complex directory structures. This approach also makes it easier to search, retrieve, and manipulate files within the database, as we can query them using a wide range of filters, without worrying about their physical location on the server.
+
+**In the database**, what is previously (well, currently) implemented is the following complex approach:
+
+1. You upload a file
+2. It gets stored in a unique folder name
+3. The files inside this folder gets analyzed and validated
+4. This temporary unique folder is now ready to be renamed to a new folder
+5. This new folder is nested into many other directories, let's say, it's something like `./uploads/14/Missions/55` (Where 14 is User ID and 55 is Project ID)
+6. The database is informed if the file(s) of type X exist or not.
+
+Let me explain the step 6 better. Let's say a mission has a banner image. After all these steps we tell the Project database that the Project 55 has a banner image by setting the "banner" field to true. Well, you can already see this is not very intuitive and practical specially in a real-life scenario where the original DYOM website has over **67k missions**.
+
+Our goal is to have the following approach on the future:
+
+1. You upload a file
+2. It gets stored in the temp folder and renamed to its CRC
+3. Each file is validated and analyzed
+4. It is moved from the temporary folder to its designated folder based on its type, for example, ./uploads/missions.
+5. The database is informed of the file's CRC.
+
+By using this method, instead of relying on a "banner" field to store a true or false value and having to run multiple functions to locate the file, the "banner" field now holds the file's CRC number, making it easier to find and retrieve the file as needed.
+
+**Now in the directory structure**. How will they change exactly?
+
+Currently, our directory structure looks like this:
+
+```
+- Uploads
+-- 11
+--- Missions
+---- 39
+----- file.dat
+----- banner.png
+--- temp
+---- new_project-i1d8e19
+----- file.dat
+----- banner.png
+-- new_user-2ee9o39
+--- avatar.png
+```
+
+In the future, the focus is to have a structure like the following:
+
+```
+- Uploads
+-- Missions
+--- 1708735045
+--- 5008339925
+--- ...
+-- Images
+--- 0735817041
+--- 0770413581
+--- ...
+```
+
+Overall, the benefits of the new structure are:
+
+- **Simplification:** The new structure simplifies the file storage system by eliminating the need for multiple folders and complex server-side code.
+- **Efficiency:** It makes the system more efficient by reducing the amount of code required and increasing the speed of file handling.
+- **Scalability:** The new structure is more scalable, as it can handle a large number of files and folders with ease.
+- **Maintenance:** The system is easier to maintain and backup, as it has a flat hierarchy and all files are stored in a single directory.
+
+Hopefully, I'll be able to finish most of these implementations on the site :wink:
+
 ## DevLog #18 - 12.04.2023
 
 Hello everyone, I had a tiring day today, so I'll keep it short because I'm really looking forward to getting some rest. :smile:
