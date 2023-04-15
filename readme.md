@@ -16,7 +16,7 @@
 
 ### DYOM Bingo
 
-Today was a day of organization in the DYOM Bingo repository. I made a total adjustment to the repository's [README.md](https://github.com/Toriality/DYOM-Bingo/README.md), made it prettier and more readable, and the main thing, added the all-contributors to the project.
+Today was a day of organization in the DYOM Bingo repository. I made a total adjustment to the repository's [README.md](https://github.com/Toriality/DYOM-Bingo), made it prettier and more readable, and the main thing, added the all-contributors to the project.
 
 [All-contributors](https://allcontributors.org) is a tool that allows contributors to be recognized and credited for their work in a project. It generates a table in the project's README.md file that lists all the contributors and their types of contributions. It is very beneficial because it helps acknowledge and appreciate the efforts of all contributors, regardless of the size or type of their contributions. This can increase the motivation and engagement of contributors and improve the overall project.
 
