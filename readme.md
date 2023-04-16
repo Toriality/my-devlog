@@ -12,6 +12,55 @@
 
 </details>
 
+## DevLog #20 - 15.04.2023
+
+### DYOM Bingo
+
+There was a pending issue in the repo regarding the calculation of the timer on DYOM Bingo. The issue was related to the timer and PB text being updated on every tick call, which occurs every 200ms. Thats not an ideal approach in terms of performance.
+
+I implemented a new logic where these DOM elements only update when necessary. As a result, the timer is now going to update every second, and the PB updates only when the user gets a new high score for PB.
+
+[Take a look at the Pull Request to have a more in-depth view of the changes made!](https://github.com/Toriality/DYOM-Bingo/pull/30)
+
+Heres a demonstration of how the DOM was being updated and how it is working currently:
+
+<div align="center"><h4>Before</h4></div>
+
+![opera_E5myK7Ssdf](https://user-images.githubusercontent.com/38092988/232260167-be7476d5-2381-49bc-8917-44cbb6458864.gif)
+
+<div align="center"><h4>After</h4></div>
+
+![opera_uCiGau8A1y](https://user-images.githubusercontent.com/38092988/232260172-22302c95-abc8-49ca-a7bc-306ee4854006.gif)
+
+
+### DYOM Website
+
+As I mentioned yesterday, I'll be working on restructuring the way files are stored on the server.
+
+So far I have managed to implement methods of saving the files with their respective CRC name and storing the CRC value in the database for easy access.
+
+Additionally, I have implemented a file validation function that checks if the .dat file entered is a valid DYOM file. This validation process involves reading the first 4 bytes of the file and converting them into an unsigned 32-bit integer, which should return a number 6 for all DYOM 8.1 missions. If the file doesn't return 6, it will be invalidated.
+
+```js
+async function validateFiles(req, res, next) {
+  const DYOM_NUM = 6;
+  const file = req.files.file[0];
+  const fileData = fs.openSync(file.path, "r");
+  const buf = Buffer.alloc(4);
+  fs.readSync(fileData, buf, 0, 4, 0);
+  const fileNum = buf.readUInt32LE(0);
+  fs.closeSync(fileData);
+
+  if (fileNum == DYOM_NUM) {
+    next();
+  } else {
+    res.status(400).json({ msg: "File must be a valid DYOM mission.")
+  }
+}
+```
+
+Tomorrow, I plan to further improve these functions and apply them to routes for downloading files, getting an random mission from database, among others routes I should update with this new method.
+
 ## DevLog #19 - 14.04.2023
 
 ### DYOM Bingo
