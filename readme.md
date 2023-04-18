@@ -12,6 +12,43 @@
 
 </details>
 
+## DevLog #21 - 17.04.2023
+
+### DYOM Server
+
+Just finished another restructuring of the server and database. Now, the Projects collection has the Missions schema inside.
+
+Imagine a streaming platform where each TV show is a project, and each episode of the show is a mission within that project. Each episode (mission) would have fields like video files, summary, and views statistics. In this example, a TV show project could be "Breaking Bad", and the missions within that project would be individual episodes, such as "Ozymandias" "I.F.T." "Fly" and so on.
+
+Although it is an extra level of complexity, this approach brings some very interesting benefits that have never been explored in the DYOM community before. Let me introduce you these benefits!
+
+#### Mission Statistics
+
+Imagine a DYOM mission that takes place in a large war zone with many enemies to eliminate, or a chase mission where you had to be fast to reach your objective, or perhaps a racing mission. You may have already done some missions that fit into one or more of the styles mentioned above.
+
+Now, imagine if there was a way to know, in exact numbers, how many people played your mission and failed or won, what was the fastest or slowest play, the average time it takes players to complete your mission, and many other statistics. All of this is possible with this new system.
+
+Of course, the server alone would not be able to report what the players do in-game because it does not have access to their computer. But together with the help of another developer, **Miran**, we are making a new project that covers a new DYOM server and also a new DLL file that is activated while you play DYOM on your computer and communicates in real-time with the server, making this statistics system (and many others we are planning) possible.
+
+![miran_dll](https://user-images.githubusercontent.com/38092988/232642751-31ddfbe2-5bf6-4f90-b157-7855361598d6.png)
+
+#### DYOM Standardization 
+
+Finally, another benefit that this new structure brings is standardization of DYOM projects. Currently, you can upload a .rar file that contains literally anything inside, as long as it does not exceed 8 MB; everything is allowed in it. In the new system, this will be very different.
+
+In our new system, when creating a project, the form will be divided into smaller sections, each corresponding to a specific aspect of the project, such as the SD section, the mission section, and so on. This means that users will only be able to upload files that are relevant to each section. For example, in the SD section, only files that would normally be found in the SD folder will be allowed, and in the mission section, only .dat files will be valid.
+
+After a user submits their project, the server will collect all the relevant files and organize them into logical directories. When a user downloads the mission, the server will package all the necessary files into a .rar file and deliver it to the end-user. The package will even include a default readme.txt file that provides instructions on how to install the mission, simplifying the process even more!
+
+Here's a screenshot taken today from the database demonstrating an example project:
+
+![MongoDBCompass_mhzwU9pxw1](https://user-images.githubusercontent.com/38092988/232642780-586de765-39d0-4e0c-842f-a07125d00dbd.png)
+
+However, there are some issues that will need to be resolved in the coming days:
+
+- I forgot to make a field to set SD code :neutral_face:	
+- SD and modloader folders have the CRC values of uploaded files, but they don't store the original names of these files, which makes them useless since the game wouldn't be able to read them properly.
+
 ## DevLog #20 - 15.04.2023
 
 ### DYOM Bingo
