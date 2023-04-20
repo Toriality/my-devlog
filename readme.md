@@ -12,6 +12,74 @@
 
 </details>
 
+## DevLog #22 - 20.04.2023
+
+In the last few days I've managed to make some progress on the server, it's not much, but I feel that today things have started to move faster and that the structure is starting to have a level of organization and functionality that pleases me greatly. I believe that in a few days a large part of what I considered "finished but only very basic" can now be considered finished and feature complete.
+
+For instance, the database is now divided into Projects and Missions, where missions are a distinct collection containing unique IDs, routes, APIs, functions, and other features that will be implemented soon.
+
+Here's an example of how a project appears when accessing the route to get one project:
+
+```json
+{
+    "_id": 108,
+    "type": 1,
+    "title": "New test",
+    "author": {
+        "_id": 10,
+        "username": "tori"
+    },
+    "summary": "Testing",
+    "tags": [],
+    "missions": [
+        {
+            "_id": 1427,
+            "project": 108,
+            "title": "Epsode 1",
+            "slot": 1,
+            "file": "3227656827",
+            "sd": [
+                {
+                    "filename": "04.mp3",
+                    "file": "970627259"
+                }
+            ],
+            "stats": [],
+            "createdAt": "2023-04-20T16:44:19.651Z",
+            "updatedAt": "2023-04-20T16:44:19.651Z",
+            "__v": 0
+        },
+        {
+            "_id": 1428,
+            "project": 108,
+            "title": "Epsode 2",
+            "slot": 2,
+            "file": "2462789807",
+            "sd": [],
+            "stats": [],
+            "createdAt": "2023-04-20T16:44:19.661Z",
+            "updatedAt": "2023-04-20T16:44:19.661Z",
+            "__v": 0
+        }
+    ],
+    "banner": "2551692668",
+    "gallery": [],
+    "awards": [],
+    "reviews": [],
+    "views": 0,
+    "weekViews": 0,
+    "downloads": 0,
+    "modloader": [],
+    "createdAt": "2023-04-20T16:44:19.618Z",
+    "updatedAt": "2023-04-20T16:44:19.668Z",
+    "__v": 0
+}
+```
+
+Today, we also created routes for downloading missions, which currently returns a DAT file of the requested DYOM mission. However, in the future, we plan to implement a more complex solution to support package files such as DAT, SDs, modloader files, among others, which will be provided as a .rar file.
+
+Also made the routes to get missions to support requesting by CRC instead of ID, that is, you can either access the route to request a mission based on its ID or its respective CRC value. This will be useful to check if the mission you are playing does exist in the DYOM database so that we can update statistics.
+
 ## DevLog #21 - 17.04.2023
 
 ### DYOM Server
