@@ -12,6 +12,18 @@
 
 </details>
 
+## DevLog #23 - 22.04.2023
+
+Hello everybody! I have recently developed new functions that enable users to download missions and projects in a .zip file format.
+
+With the updated download route for projects, users can now download a .zip file containing all the contents of the project, including the missions, SD folders, modloader folder, and an automatically generated readme.txt file with instructions on how to install the project.
+
+Now, when downloading a mission, the default behavior is to download only the DYOM1.dat file containing the mission. However, users can also customize their download by including queries on the URL. For instance, by adding `?shouldDownloadSD` to the URL, a .zip file containing the mission and its respective SD folder will be generated. Similarly, adding `?shouldDownloadMods` will create a .zip file containing the mission and the modloader folder of the project it belongs to. You  can use these queries together to create a .zip file containing both mods and sd folders.
+
+Users can also specify the slot of the mission they wish to download using the `?slot` query. By default, the slot is set to 1, but users can modify this to any number they want. For example, adding `?slot=2` will rename the file to DYOM2.dat.
+
+I have also cleaned up the code a little bit by deleting comments and old functions. I look forward to sharing more updates soon :smile:
+
 ## DevLog #22 - 20.04.2023
 
 In the last few days I've managed to make some progress on the server, it's not much, but I feel that today things have started to move faster and that the structure is starting to have a level of organization and functionality that pleases me greatly. I believe that in a few days a large part of what I considered "finished but only very basic" can now be considered finished and feature complete.
