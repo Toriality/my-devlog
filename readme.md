@@ -12,6 +12,16 @@
 
 </details>
 
+## DevLog #24 - 24.04.2023
+
+The last two days I've decided to make some updates on our old codebase. Specifically the DailyPicks, TrendingPosts, and other outdated functions that were taking up valuable space. I decided to remove these functions since they are no longer being used on our current server and have been deprecated.
+
+Also, I took the time to modify the routes and functions for the Users and Reviews. I made sure that they are in line with the current server code's standards.
+
+In summary, a fairly good amount of code has been decreased, and the quality of the codebase has been improved by a bit.
+
+Well, that's all for today. Hope you all have a great week! :wink:
+
 ## DevLog #23 - 22.04.2023
 
 Hello everybody! I have recently developed new functions that enable users to download missions and projects in a .zip file format.
