@@ -12,6 +12,22 @@
 
 </details>
 
+## DevLog #25 - 27.04.2023
+
+The site server structure will be reorganized, once again.
+
+This time, I am very excited about these changes because they will be the most advanced changes I’ve made so far. The restructuring will be focused on the whole project, with an emphasis on Mongoose functions.
+
+Currently, we use functions created from scratch to perform data validation for things like size, regex tests, and other basic text and file validations. This approach leads to a certain amount of repetition and boilerplate in the code.
+
+My goal with this new restructuring is study the Mongoose framework and to dive deeper into its features like validations and middleware functions. The aim is to reduce the number of lines of code and imports across different files.
+
+Mongoose provides validation functions for various types of data, including the hability to create custom validators.
+
+Additionally, Mongoose has middleware that enables the execution of functions before and after certain events. For instance, with the post(‘save’) function, which runs after a project is saved in the database, we can update the user who created the project by adding the project ID to their document.
+
+I am still in the early stages of these implementations, I will have more updates in the next few days.
+
 ## DevLog #24 - 24.04.2023
 
 The last two days I've decided to make some updates on our old codebase. Specifically the DailyPicks, TrendingPosts, and other outdated functions that were taking up valuable space. I decided to remove these functions since they are no longer being used on our current server and have been deprecated.
