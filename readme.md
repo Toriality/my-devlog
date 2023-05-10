@@ -25,7 +25,8 @@ On this page we see the title and description of the site in a big font, with so
 
 One of the features that stands out on this page is its background. Within a second after the page is done loading, the background displays 50 different images with a slight blur effect and a smoothly slide transition animation.
 
-![ctgif]()
+![opera_paHCP8nwHy](https://github.com/Toriality/my-devlog/assets/38092988/760ea80c-83d2-42d9-9e4f-dcabca90a1bc)
+
 
 ### Database: Invalid queries
 
@@ -34,9 +35,11 @@ This is not visible to the user, but while he is loading a random song, several 
 In an attempt to reduce the user's waiting time, one of the alternatives found (but not heavily tested yet) is to include invalid queries in the site's database. Let's suppose the following query;
 
 ```json
-year: 1903
-offset: 883
-word: "dust"
+{
+"year": 1903,
+"offset": 883,
+"word": "dust"
+}
 ```
 
 This query is called in the Spotify API, which returns no results. So this query is added to the database of invalid queries.
