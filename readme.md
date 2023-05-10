@@ -13,6 +13,46 @@
 
 </details>
 
+## DevLog #27 - 09.05.2023
+
+Many new features are currently being developed for Chronotune. In this post, I will list all the new features that are ready or almost ready to be released in the next version of the site, which should be available in a few days.
+
+### Title Menu
+
+A title menu for the site, with a simple design but with some unique features that have the Chronotune essence.
+
+On this page we see the title and description of the site in a big font, with some rather oversized text shading. And we see buttons with a vibrant yellow, black border and shadow. It's a mix of the vibrant Spotify visuals with a more exaggerated neubrutalist feel.
+
+One of the features that stands out on this page is its background. Within a second after the page is done loading, the background displays 50 different images with a slight blur effect and a smoothly slide transition animation.
+
+![ctgif]()
+
+### Database: Invalid queries
+
+This is not visible to the user, but while he is loading a random song, several calls to the Spotify API are made, with a random word, year and offset. Often this random combination results in no songs being found, or some invalid result. And in order not to exceed Spotify's API call per second limits, for each invalid query, it waits 3 seconds for a new query. Meanwhile all of this is happening, our user is still waiting on the loading screen.
+
+In an attempt to reduce the user's waiting time, one of the alternatives found (but not heavily tested yet) is to include invalid queries in the site's database. Let's suppose the following query;
+
+```json
+year: 1903
+offset: 883
+word: "dust"
+```
+
+This query is called in the Spotify API, which returns no results. So this query is added to the database of invalid queries.
+
+The next time a user gets this same query, the site won't bother calling the Spotify API, because it already knows that the query is invalid, and will generate a completely new query automatically, with no waiting time.
+
+### Refactoring
+
+Today, I spent the day cleaning up the code, particularly on the server-side. Although it is not yet complete, we are on the right track. The code has fewer repetitions and is better documented.
+
+For example, as I said above, when we search for a random song the server waits 3 seconds to search again. However, we cannot leave the server endlessly attempting to perform this task. Every task that requires retries needs a timeout and a limited number of retries. In other words, the function to fetch a random song, generate a new access token, or generate a new image variant all require a retry functionality.
+
+Previously, the same logic was being written repeatedly in each of these functions. After today's refactoring, a high-order function is called on all of these routes, which can be customized as needed, reducing unnecessary repetition and consolidating all the retentive logic in a single space.
+
+That's it for today. I'm excited to release the new version of Chornotune soon, with many cool new features and fixes, which I'll keep reporting them here as they progress their development.
+
 ## DevLog #26 - 06.05.2023
 
 It's hard to believe we're already in May, time seems to be flying this year.
