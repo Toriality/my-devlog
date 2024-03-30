@@ -1,3 +1,6 @@
+> [!NOTE]
+> I don't update this devlog anymore.
+
 # Toriality's DevLogs
 
 **Here I'll share all my projects' progress!**
